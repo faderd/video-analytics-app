@@ -1,0 +1,22 @@
+.item {
+    color: #353535;
+    cursor: pointer;
+}
+
+.item--did {
+    color: #dddddd;
+}
+
+.item--current {
+    color: rgb(54, 143, 179);
+}
+
+.item:hover {
+    color: #353535;
+    font-weight: 600;
+}
+
+.item:active {
+    color: #000;
+    text-shadow: 0 0 1px;
+}

@@ -1,0 +1,9 @@
+.main {
+    display: flex;
+}
+
+.main__event-list {
+    margin-right: 15px;
+    max-height: 720px;
+    overflow: scroll;
+}
