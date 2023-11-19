@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
   getCurrentTimeSelector,
+  getIsDataLoading,
   getIsUpdatingTimeFromCodeSelector,
 } from '../../store/video-slice/selectors';
 import {
@@ -18,6 +19,7 @@ function VideoPlayer({ videoUrl }: VideoPlayerProps): JSX.Element {
   const dispatch = useAppDispatch();
   const videoRef = useRef<HTMLVideoElement>(null);
   const currentTime = useAppSelector(getCurrentTimeSelector);
+  const isDataLoading = useAppSelector(getIsDataLoading);
 
   // флаг для определения, происходит ли обновление времени в результате изменения currentTime из кода или из события timeupdate
   const isUpdatingTimeFromCode = useAppSelector(
@@ -56,22 +58,32 @@ function VideoPlayer({ videoUrl }: VideoPlayerProps): JSX.Element {
   }, [currentTime, dispatch, isUpdatingTimeFromCode]);
 
   return (
-    <div style={{ position: 'relative', overflow: 'hidden', lineHeight: 0, width: '1280px'}}>
+    <div
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        lineHeight: 0,
+        width: '1280px',
+      }}
+    >
       <video
         ref={videoRef}
-        controls
-        controlsList="nofullscreen"
+        controls={!isDataLoading}
+        controlsList='nofullscreen'
         width='1280'
+        muted={isDataLoading}
         onClick={(evt) => {
           evt.preventDefault();
-          videoRef.current?.paused
-            ? videoRef.current?.play()
-            : videoRef.current?.pause();
+
+          if (!isDataLoading) {
+            videoRef.current?.paused
+              ? videoRef.current?.play()
+              : videoRef.current?.pause();
+          }
         }}
       >
         <source src={videoUrl} type='video/mp4' />
       </video>
-
 
       <CurrentEventsRender videoRef={videoRef} />
     </div>

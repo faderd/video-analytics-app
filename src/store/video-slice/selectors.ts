@@ -13,3 +13,6 @@ export const getCurrentAnalyticEventsSelector = (state: State) =>
   state[NameSpace.Data].analyticEvents.filter(
     (event) => event.state === AnalyticEventState.Current
   );
+
+export const getIsDataLoading = (state: State) =>
+  state[NameSpace.Data].isDataLoading;
