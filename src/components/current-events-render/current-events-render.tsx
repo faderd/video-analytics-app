@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useAppSelector } from '../../hooks';
 import { getCurrentAnalyticEventsSelector } from '../../store/video-slice/selectors';
 import Rectangle from '../rectangle/rectangle';
@@ -6,7 +7,7 @@ type CurrentEventsRenderProps = {
   videoRef: React.RefObject<HTMLVideoElement>;
 };
 
-function CurrentEventsRender({
+const CurrentEventsRender = memo(function CurrentEventsRender({
   videoRef,
 }: CurrentEventsRenderProps): JSX.Element {
   const currentAnalyticEvents = useAppSelector(
@@ -28,6 +29,6 @@ function CurrentEventsRender({
       ))}
     </>
   );
-}
+});
 
 export default CurrentEventsRender;
