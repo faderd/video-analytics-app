@@ -1,27 +1,37 @@
-# React + TypeScript + Vite
+# Тестовое задание - отображение видеоаналитики
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Доступен на [GitHub Pages](https://faderd.github.io/video-analytics-app/).
 
-Currently, two official plugins are available:
+Есть список событий аналитики с таймстемпами (временем в миллисекундах от начала видео) и данными о зоне в кадре, в которой событие возникло (координаты в пикселях): https://run.mocky.io/v3/085041d6-c0a5-4d4c-8ba9-829a0212d75b
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Адрес тестового видеопотока:
+http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
 
-## Expanding the ESLint configuration
+Необходимо реализовать веб-приложение, обладающее следующим функционалом:
+- Отображение тестового видео с возможностью постановки на паузу и возобновлением
+воспроизведения по клику на область видео.
+- Отображения списка событий аналитики с возможностью позиционирования видео на момент,
+указанный в событии.
+- Список событий должен быть отсортирован по дате возникновения, само событие должно
+отображаться в списке в виде времени своего возникновения в формате MM:SS:sss
+(минуты:секунды:миллисекунды). Пример: 00:03:012, 01:05:123, 03:26:100.
+- В момент возникновения события в плеере поверх видео должен рисоваться зелёный прямоугольник,
+соответствующий области, определённой в событии. Прямоугольник должен отображаться как при
+переходе к событию по клику из списка событий, так и в случае обычного воспроизведения и
+навигации по видео. При наступлении даты окончания события, прямоугольник должен скрываться.
+Возможна ситуация что одновременно показываются 2 и более прямоугольника.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Запуск проекта
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+Установить зависимости:
+```bash
+npm install
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Запуск проекта в режиме разработки
+```bash
+npm run dev
+```
+### Сборка проекта
+```bash
+npm run build
+```
